@@ -25,11 +25,8 @@ const state = reactive({
 
 const globalSteps = ref(1000)
 
-const displayOverview = computed(() => {
-  return JSON.stringify(state.cut_overview_container)
-})
+const displayOverview = computed(() => state.cut_overview_container.map((item: ListItem) => `[${item.cuts}]*${item.steps}`).join('+'))
 
-const displayInnercut = computed(() => state.cut_innercut_container.map((item: ListItem) => `[${item.cuts}]*${item.steps}`).join('+')
-)
+const displayInnercut = computed(() => state.cut_innercut_container.map((item: ListItem) => `[${item.cuts}]*${item.steps}`).join('+'))
 
 </script>
