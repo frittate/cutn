@@ -1,18 +1,30 @@
 <template>
-  <div>
-    <div>
-      <input type="number" name="" id="" v-model="globalSteps">
-      <h2>cut_overview</h2>
-      <ListView v-model="state.cut_overview_container" :global-steps="globalSteps" />
-      <p>{{ displayOverview }}</p>
+  <main class="container">
+    <h1>cutn schedule helper</h1>
+    <div class="row">
+      <h2>Settings</h2>
+      <input type="number" name="" id="" v-model="globalSteps" disabled />
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2>cut_overview</h2>
+        
+        <Chart :input-data="state.cut_overview_container" :global-steps="globalSteps" data-label="cut_overview" />
+        <DisplayCard>{{ displayOverview }}</DisplayCard>
+        <ListView v-model="state.cut_overview_container" :global-steps="globalSteps" />
+      </div>
+
+      <div class="col">
+        <h2>cut_innercut</h2>
+
+        <Chart :input-data="state.cut_innercut_container" :global-steps="globalSteps" data-label="cut_innercut" />
+        <DisplayCard>{{ displayInnercut }}</DisplayCard>
+        <ListView v-model="state.cut_innercut_container" :global-steps="globalSteps" />
+
+      </div>
     </div>
 
-    <div>
-      <h2>cut_innercut</h2>
-      <ListView v-model="state.cut_innercut_container" :global-steps="globalSteps" />
-      <p>{{ displayInnercut }}</p>
-    </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

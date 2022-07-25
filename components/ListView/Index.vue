@@ -1,34 +1,41 @@
 <template>
-  <div>
-    <table>
+  <div class="mt-5">
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th>Cuts</th>
+          <th>#</th>
           <th>Steps</th>
+          <th>Cuts</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in listContainer" :key="item.id">
+        <tr v-for="(item, index) in listContainer" :key="item.id">
+          <td>{{ index + 1 }}</td>
           <td>
-            <input type="number" :value="item.cuts" @input="event => updateItem('cuts', item.id, event.target.value)">
+            <input type="number" min="0" step="10" :value="item.steps"
+              @input="event => updateItem('steps', item.id, event.target.value)">
           </td>
           <td>
-            <input type="number" :value="item.steps" @input="event => updateItem('steps', item.id, event.target.value)">
+            <input type="number" min="0" step="0.01" :value="item.cuts"
+              @input="event => updateItem('cuts', item.id, event.target.value)">
           </td>
           <td>
-            <button @click="deleteItem(item.id)">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
         <tr>
-          <td>
-            <button @click="addItem(0)">Add</button>
-            <button @click="fillUp" :disabled="sumSteps >= globalSteps">Fill to {{ globalSteps }}</button>
+          <td colspan="4">
+            <button type="button" class="btn btn-primary" @click="addItem(0)" :disabled="listContainer.length >= 20">
+              {{ listContainer.length >= 20 ? 'maximum of 20 reached' : 'Add' }}</button>
+            <button type="button" class="btn btn-primary ms-4" @click="fillUp" :disabled="sumSteps >= globalSteps">Fill
+              to {{ globalSteps }}</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <p>{{ sumSteps }}</p>
+    <p>{{ sumSteps }} steps / {{ globalSteps }} max <span class="badge bg-danger" v-show="sumSteps > globalSteps">too
+        many steps</span></p>
   </div>
 </template>
 
