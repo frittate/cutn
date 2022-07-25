@@ -56,21 +56,35 @@ export default {
       default: () => { }
     }
   },
-  data() {
-    return {
-      chartOptions: {
+  computed: {
+    chartOptions() {
+      const maxCuts = this.inputData.map((item) => {
+        return item.cuts;
+      });
+
+      const yMax = Math.max(...maxCuts) * 1.2;
+
+      return {
         pointRadius: 0,
         responsive: true,
         scales: {
           y: {
+            title: {
+              display: true,
+              text: 'cuts'
+            },
             suggestedMin: 0,
-            suggestedMax: 24
+            suggestedMax: yMax
           },
+          x: {
+            title: {
+              display: true,
+              text: 'steps'
+            },
+          }
         }
       }
-    }
-  },
-  computed: {
+    },
     calculateLabels() {
       const labels = []
 

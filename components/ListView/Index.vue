@@ -21,15 +21,16 @@
               @input="event => updateItem('cuts', item.id, event.target.value)">
           </td>
           <td>
-            <button type="button" class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
+            <button type="button" class="btn btn-primary btn-sm" @click="fillItem(item.id, item.steps)" :disabled="sumSteps >= globalSteps">Fill steps</button>
+            <button type="button" class="btn btn-danger ms-2 btn-sm" @click="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
         <tr>
           <td colspan="4">
             <button type="button" class="btn btn-primary" @click="addItem(0)" :disabled="listContainer.length >= 20">
               {{ listContainer.length >= 20 ? 'maximum of 20 reached' : 'Add' }}</button>
-            <button type="button" class="btn btn-primary ms-4" @click="fillUp" :disabled="sumSteps >= globalSteps">Fill
-              to {{ globalSteps }}</button>
+            <button type="button" class="btn btn-primary ms-2" @click="fillUp" :disabled="sumSteps >= globalSteps">Add item
+              to fill to {{ globalSteps }} steps</button>
           </td>
         </tr>
       </tbody>
@@ -92,5 +93,11 @@ const deleteItem = (id: number) => {
 const fillUp = () => {
   const missingSteps = props.globalSteps - sumSteps.value
   addItem(missingSteps)
+}
+
+const fillItem = (id: number, steps: number) => {
+  const val: number = (Number(props.globalSteps) - Number(sumSteps.value)) + steps
+  
+  updateItem('steps', id, val)
 }
 </script>
