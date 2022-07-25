@@ -81,6 +81,12 @@ export default {
               display: true,
               text: 'steps'
             },
+            type: 'linear',
+            suggestedMin: 0,
+            suggestedMax: 1000,
+            ticks: {
+              stepSize: 100
+            }
           }
         }
       }

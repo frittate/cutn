@@ -34,7 +34,6 @@
 
 <script setup lang="ts">
 import { ListItem } from '~/utils/interfaces';
-import NavBar from './components/NavBar/Index.vue';
 
 const state = reactive({
   cut_overview_container: [{ id: 1, steps: 400, cuts: 12 }, { id: 2, steps: 600, cuts: 4 }],

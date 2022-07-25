@@ -17,7 +17,7 @@
               @input="event => updateItem('steps', item.id, event.target.value)">
           </td>
           <td>
-            <input type="number" min="0" step="0.01" :value="item.cuts"
+            <input type="number" min="0" step="1" :value="item.cuts"
               @input="event => updateItem('cuts', item.id, event.target.value)">
           </td>
           <td>
